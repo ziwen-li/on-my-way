@@ -21,7 +21,10 @@ const TEXT = {
         },
         btn_find_carrier: { zh: "我要找人带", en: "Find a Carrier" },
         btn_offer_service: { zh: "我可以带", en: "Offer a Service" },
-        main_note: { zh: "✈️ 仅限合法、轻量物品 · 平台不参与交易", en: "✈️ Only legal, lightweight items · Platform does not handle transactions" },
+        main_note: {
+            zh: "✈️ 仅限合法、轻量物品 · 平台不收费、不参与交易 · 不提供安全检查", 
+            en: "✈️ Only legal, lightweight items · Platform does not charge fees or handle transactions · No safety checks performed"
+        },
 
         section_requests: { zh: "最新物品需求", en: "Latest Requests" },
         section_offers: { zh: "最新旅客服务", en: "Latest Travel Offers" },

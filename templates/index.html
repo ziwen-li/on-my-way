@@ -29,8 +29,6 @@
                 <a href="{{ url_for('request_new') }}" class="btn btn-success btn-lg me-2" id="btn-find-carrier">我要找人带</a>
                 <a href="{{ url_for('offer_new') }}" class="btn btn-outline-primary btn-lg" id="btn-offer-service">我可以带</a>
             </div>
-
-            <p class="text-muted mt-4 small" id="main-note"></p>
         </div>
     </div>
 </div>
@@ -43,6 +41,7 @@
     <h3 id="section-offers-title" class="mb-3"></h3>
     {% include "partials/offers_list_partial.html" %}
 </div>
+
 {% endblock %}
 
 {% block scripts %}

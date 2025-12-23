@@ -1,3 +1,5 @@
+from datetime import date
+
 from flask import Flask, render_template, request, redirect, url_for
 from models import db, TravelOffer, DeliveryRequest
 from config import DevelopmentConfig
@@ -15,8 +17,17 @@ def create_tables():
 
 @app.route('/')
 def index():
-    requests_ = DeliveryRequest.query.order_by(DeliveryRequest.created_at.desc()).all()
-    offers = TravelOffer.query.order_by(TravelOffer.created_at.desc()).all()
+    today = date.today()
+    
+    # 只显示期望日期还没到的请求
+    requests_ = DeliveryRequest.query.filter(DeliveryRequest.desired_date >= today)\
+                                     .order_by(DeliveryRequest.created_at.desc())\
+                                     .all()
+    
+    # 只显示未来的旅客服务
+    offers = TravelOffer.query.filter(TravelOffer.travel_date >= today)\
+                              .order_by(TravelOffer.created_at.desc())\
+                              .all()    
     return render_template('index.html', offers=offers, requests=requests_)
 
 
@@ -24,7 +35,11 @@ def index():
 
 @app.route('/offers')
 def offers_list():
-    offers = TravelOffer.query.order_by(TravelOffer.created_at.desc()).all()
+    today = date.today()    
+    # 只显示未来的旅客服务
+    offers = TravelOffer.query.filter(TravelOffer.travel_date >= today)\
+                              .order_by(TravelOffer.created_at.desc())\
+                              .all()        
     return render_template('offers_list.html', offers=offers)
 
 
@@ -53,6 +68,11 @@ def offer_new():
 
 @app.route('/requests')
 def requests_list():
+    today = date.today()    
+    # 只显示期望日期还没到的请求
+    requests_ = DeliveryRequest.query.filter(DeliveryRequest.desired_date >= today)\
+                                     .order_by(DeliveryRequest.created_at.desc())\
+                                     .all()
     requests_ = DeliveryRequest.query.order_by(DeliveryRequest.created_at.desc()).all()
     return render_template('requests_list.html', requests=requests_)
 
