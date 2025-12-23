@@ -1,0 +1,30 @@
+<div id="requests-list">
+    <h3 id="section-requests-title" class="mb-3"></h3>
+    {% if requests %}
+        <div class="list-group mb-4">
+            {% for req in requests %}
+            <div class="list-group-item list-group-item-action mb-2">
+                <strong class="req-route">{{ req.from_country }} → {{ req.to_country }}</strong>
+                <p class="req-details">{{ req.item_description }} | {{ req.weight }}kg | {{ req.desired_date }} | ${{ req.budget }}</p>
+                <p class="req-contact">{{ req.contact }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p id="no-requests-msg"></p>
+    {% endif %}
+</div>
+
+<script src="{{ url_for('static', filename='js/text.js') }}"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const lang = navigator.language.startsWith('en') ? 'en' : 'zh';
+
+    // 标题
+    document.getElementById('section-requests-title').innerText = TEXT.request_list.page_title[lang];
+
+    // 空列表提示
+    const noRequests = document.getElementById('no-requests-msg');
+    if(noRequests) noRequests.innerText = TEXT.request_list.no_requests[lang];
+});
+</script>

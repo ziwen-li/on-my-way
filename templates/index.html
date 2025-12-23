@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}On my way{% endblock %}
+
+{% block content %}
+<!-- 顶部导航 / Logo + Slogan -->
+
+<!-- 顶部动画和介绍部分保持原样 -->
+<div class="container py-5">
+    <div class="row align-items-center">
+        <div class="col-md-6 text-center">
+            <lottie-player
+                src="{{ url_for('static', filename='lottie/delivery-on-the-way.json') }}"
+                background="transparent"
+                speed="1"
+                style="width: 100%; max-width: 420px; margin: auto;"
+                loop
+                autoplay>
+            </lottie-player>
+        </div>
+        <div class="col-md-6 text-center text-md-start mt-4 mt-md-0">
+            <h1 class="display-5 fw-bold" id="main-title">
+                顺路捎带，<br>让跨国更简单
+            </h1>
+            <p class="lead mt-3" id="main-desc">
+                出国旅行的人，顺路帮你带文件或小物品。<br>更快、更省、更真实的人与人连接。
+            </p>
+            <div class="mt-4">
+                <a href="{{ url_for('request_new') }}" class="btn btn-success btn-lg me-2" id="btn-find-carrier">我要找人带</a>
+                <a href="{{ url_for('offer_new') }}" class="btn btn-outline-primary btn-lg" id="btn-offer-service">我可以带</a>
+            </div>
+
+            <p class="text-muted mt-4 small" id="main-note"></p>
+        </div>
+    </div>
+</div>
+
+<!-- 下方展示最新物品需求和旅客服务 -->
+<div class="container py-5">
+    <h3 id="section-requests-title" class="mb-3"></h3>
+    {% include "partials/requests_list_partial.html" %}
+
+    <h3 id="section-offers-title" class="mb-3"></h3>
+    {% include "partials/offers_list_partial.html" %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const lang = navigator.language.startsWith('en') ? 'en' : 'zh';
+    
+    // 设置首页文本
+    document.getElementById('logo-text').innerText = TEXT.navbar.logo_text[lang];
+    document.getElementById('slogan').innerText = TEXT.navbar.slogan[lang];
+
+    // 顶部文字
+    document.getElementById('main-title').innerText = TEXT.index.main_title[lang];
+    document.getElementById('main-desc').innerText = TEXT.index.main_desc[lang];
+    document.getElementById('btn-find-carrier').innerText = TEXT.index.btn_find_carrier[lang];
+    document.getElementById('btn-offer-service').innerText = TEXT.index.btn_offer_service[lang];
+    document.getElementById('main-note').innerText = TEXT.index.main_note[lang];
+
+
+    // 下方列表标题
+    document.getElementById('section-requests-title').innerText = TEXT.index.section_requests[lang];
+    document.getElementById('section-offers-title').innerText = TEXT.index.section_offers[lang];
+
+    // 空列表提示
+    const noRequests = document.getElementById('no-requests-msg');
+    if(noRequests) noRequests.innerText = TEXT.index.no_requests[lang];
+
+    const noOffers = document.getElementById('no-offers-msg');
+    if(noOffers) noOffers.innerText = TEXT.index.no_offers[lang];    
+});
+</script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    {% include "partials/requests_list_partial.html" %}
+    <div class="mt-3">
+        <a href="{{ url_for('request_new') }}" class="btn btn-success" id="btn-new-request"></a>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary" id="btn-back-home"></a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const lang = navigator.language.startsWith('en') ? 'en' : 'zh';
+
+    // 页面标题
+    // document.getElementById('page-title').innerText = TEXT.request_new.page_title[lang];
+
+    document.getElementById('btn-new-request').innerText = TEXT.request_list.btn_new_request[lang];
+    document.getElementById('btn-back-home').innerText = TEXT.request_list.btn_back_home[lang];
+});
+</script>
+{% endblock %}

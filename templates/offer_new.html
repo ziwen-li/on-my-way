@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 id="page-title" class="mb-4"></h2>
+
+    <form method="POST" class="row g-3">
+        <div class="col-md-6">
+            <label for="from_country" class="form-label" id="label-from-country"></label>
+            <input type="text" class="form-control" id="from_country" name="from_country" required>
+        </div>
+        <div class="col-md-6">
+            <label for="from_city" class="form-label" id="label-from-city"></label>
+            <input type="text" class="form-control" id="from_city" name="from_city">
+        </div>
+        <div class="col-md-6">
+            <label for="to_country" class="form-label" id="label-to-country"></label>
+            <input type="text" class="form-control" id="to_country" name="to_country" required>
+        </div>
+        <div class="col-md-6">
+            <label for="to_city" class="form-label" id="label-to-city"></label>
+            <input type="text" class="form-control" id="to_city" name="to_city">
+        </div>
+        <div class="col-md-6">
+            <label for="travel_date" class="form-label" id="label-travel-date"></label>
+            <input type="date" class="form-control" id="travel_date" name="travel_date" required>
+        </div>
+        <div class="col-md-6">
+            <label for="available_weight" class="form-label" id="label-available-weight"></label>
+            <input type="number" step="0.1" class="form-control" id="available_weight" name="available_weight" required>
+        </div>
+        <div class="col-md-6">
+            <label for="item_type" class="form-label" id="label-item-type"></label>
+            <input type="text" class="form-control" id="item_type" name="item_type" required>
+        </div>
+        <div class="col-md-6">
+            <label for="reward" class="form-label" id="label-reward"></label>
+            <input type="text" class="form-control" id="reward" name="reward" required>
+        </div>
+        <div class="col-12">
+            <label for="contact" class="form-label" id="label-contact"></label>
+            <input type="text" class="form-control" id="contact" name="contact" required>
+        </div>
+        <div class="col-12 mt-3">
+            <button type="submit" class="btn btn-primary" id="btn-submit"></button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary" id="btn-back"></a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/text.js') }}"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const lang = navigator.language.startsWith('en') ? 'en' : 'zh';
+
+    document.getElementById('page-title').innerText = TEXT.offer_new.page_title[lang];
+
+    document.getElementById('label-from-country').innerText = TEXT.offer_new.from_country[lang];
+    document.getElementById('label-from-city').innerText = TEXT.offer_new.from_city[lang];
+    document.getElementById('label-to-country').innerText = TEXT.offer_new.to_country[lang];
+    document.getElementById('label-to-city').innerText = TEXT.offer_new.to_city[lang];
+    document.getElementById('label-travel-date').innerText = TEXT.offer_new.travel_date[lang];
+    document.getElementById('label-available-weight').innerText = TEXT.offer_new.available_weight[lang];
+    document.getElementById('label-item-type').innerText = TEXT.offer_new.item_type[lang];
+    document.getElementById('label-reward').innerText = TEXT.offer_new.reward[lang];
+    document.getElementById('label-contact').innerText = TEXT.offer_new.contact[lang];
+
+    document.getElementById('btn-submit').innerText = TEXT.offer_new.btn_submit[lang];
+    document.getElementById('btn-back').innerText = TEXT.offer_new.btn_back[lang];
+});
+</script>
+{% endblock %}

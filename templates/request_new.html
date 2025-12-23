@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 id="page-title" class="mb-4"></h2>
+
+    <form method="POST" class="row g-3">
+        <div class="col-md-6">
+            <label for="from_country" class="form-label" id="label-from-country"></label>
+            <input type="text" class="form-control" id="from_country" name="from_country" required>
+        </div>
+        <div class="col-md-6">
+            <label for="to_country" class="form-label" id="label-to-country"></label>
+            <input type="text" class="form-control" id="to_country" name="to_country" required>
+        </div>
+        <div class="col-12">
+            <label for="item_description" class="form-label" id="label-item-description"></label>
+            <input type="text" class="form-control" id="item_description" name="item_description" required>
+        </div>
+        <div class="col-md-6">
+            <label for="weight" class="form-label" id="label-weight"></label>
+            <input type="number" step="0.1" class="form-control" id="weight" name="weight" required>
+        </div>
+        <div class="col-md-6">
+            <label for="desired_date" class="form-label" id="label-desired-date"></label>
+            <input type="date" class="form-control" id="desired_date" name="desired_date" required>
+        </div>
+        <div class="col-md-6">
+            <label for="budget" class="form-label" id="label-budget"></label>
+            <input type="text" class="form-control" id="budget" name="budget" required>
+        </div>
+        <div class="col-md-6">
+            <label for="contact" class="form-label" id="label-contact"></label>
+            <input type="text" class="form-control" id="contact" name="contact" required>
+        </div>
+        <div class="col-12 mt-3">
+            <button type="submit" class="btn btn-success" id="btn-submit"></button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary" id="btn-back"></a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/text.js') }}"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const lang = navigator.language.startsWith('en') ? 'en' : 'zh';
+
+    // 页面标题
+    document.getElementById('page-title').innerText = TEXT.request_new.page_title[lang];
+
+    // 表单标签
+    document.getElementById('label-from-country').innerText = TEXT.request_new.from_country[lang];
+    document.getElementById('label-to-country').innerText = TEXT.request_new.to_country[lang];
+    document.getElementById('label-item-description').innerText = TEXT.request_new.item_description[lang];
+    document.getElementById('label-weight').innerText = TEXT.request_new.weight[lang];
+    document.getElementById('label-desired-date').innerText = TEXT.request_new.desired_date[lang];
+    document.getElementById('label-budget').innerText = TEXT.request_new.budget[lang];
+    document.getElementById('label-contact').innerText = TEXT.request_new.contact[lang];
+
+    // 按钮
+    document.getElementById('btn-submit').innerText = TEXT.request_new.btn_submit[lang];
+    document.getElementById('btn-back').innerText = TEXT.request_new.btn_back[lang];
+});
+</script>
+{% endblock %}

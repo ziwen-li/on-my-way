@@ -1,0 +1,30 @@
+<div id="offers-list">
+    <h3 id="section-offers-title" class="mb-3"></h3>
+    {% if offers %}
+        <div class="list-group mb-4">
+            {% for offer in offers %}
+            <div class="list-group-item list-group-item-action mb-2">
+                <strong class="offer-route">{{ offer.from_country }} {{ offer.from_city or '' }} → {{ offer.to_country }} {{ offer.to_city or '' }}</strong>
+                <p class="offer-details">{{ offer.travel_date }} | {{ offer.available_weight }}kg | {{ offer.item_type }} | ${{ offer.reward }}</p>
+                <p class="offer-contact">{{ offer.contact }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p id="no-offers-msg"></p>
+    {% endif %}
+</div>
+
+<script src="{{ url_for('static', filename='js/text.js') }}"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const lang = navigator.language.startsWith('en') ? 'en' : 'zh';
+
+    // 标题
+    document.getElementById('section-offers-title').innerText = TEXT.offer_list.page_title[lang];
+
+    // 空列表提示
+    const noOffers = document.getElementById('no-offers-msg');
+    if(noOffers) noOffers.innerText = TEXT.offer_list.no_offers[lang];
+});
+</script>
